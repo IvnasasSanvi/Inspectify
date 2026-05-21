@@ -46,19 +46,42 @@ app.post("/fix-code", async (req, res) => {
       messages: [
 
         {
-          role: "user",
+          role: "system",
           content: `
 You are a coding assistant.
 
 Selected language: ${language}
 
 Rules:
-1. Verify the code is written in ${language}.
-2. If the code belongs to another language, say:
-   "This is not valid ${language} code."
-3. Otherwise fix the code and return corrected version only.
+1. Internally verify the code belongs to ${language}.
+2. If the language does not match, ONLY return:
+   "Language mismatch. Please select the correct language."
+
+3. If the code is logically and syntactically correct:
+   - ONLY return:
+     "Code is correct."
+
+4. If the code has syntax errors, runtime issues, or logical mistakes:
+   - Briefly mention the issue.
+   - Return ONLY the corrected code.
+   - Keep the response concise.
+
+5. Do not:
+   - Add long explanations
+   - Add markdown headings
+   - Add tables
+   - Add unnecessary best practices
+   - Rewrite correct code
+   - Explain obvious things
 `,
-        },
+        }, {
+          role: "user",
+          content: `
+Fix this code:
+
+${code}
+`,
+        }
       ],
     });
 
@@ -93,14 +116,28 @@ You are an expert code reviewer.
 Selected language: ${language}
 
 Rules:
-1. Check if the code matches the selected language.
-2. If the language is wrong, clearly say:
-   "This does not appear to be valid ${language} code."
-3. If correct:
-   - Review the code
-   - Fix mistakes
-   - Explain issues
-   - Return improved code
+
+1. Internally verify the code belongs to ${language}.
+2. If the language does not match, ONLY return:
+   "Language mismatch. Please select the correct language."
+
+3. If the code has syntax errors, runtime issues, or logical mistakes:
+   - Briefly mention the issue.
+   - Give a short correction suggestion.
+   - Return ONLY the corrected code.
+   - Keep the response concise.
+
+4. If the code is logically and syntactically correct:
+   - ONLY return:
+     "Code is correct."
+
+5. Do not:
+   - Add long explanations
+   - Add markdown headings
+   - Add tables
+   - Add unnecessary best practices
+   - Rewrite correct code
+   - Explain obvious things
 `,
         },
 
@@ -146,12 +183,21 @@ You are a code execution assistant.
 Selected language: ${language}
 
 Rules:
-1. First verify the code belongs to ${language}.
-2. If not, explain that the code language does not match.
-3. If valid:
-   - Predict output
-   - Explain runtime errors if any
-   - Return clean explanation
+1. Internally verify the code belongs to ${language}.
+2. If the language does not match, ONLY return:
+  "Language mismatch. Please select the correct language."
+
+3. If the code has syntax/runtime errors:
+   - ONLY return the error message.
+   - Do not explain anything.
+
+4. If the code has runs successfully:
+   - ONLY return the exact output.
+   - Do not add explaination.
+   - Do not add markdown.
+   - Do not add labels like "Output:".
+
+5. Keep responses short and clean.
 `,
         },
         {
