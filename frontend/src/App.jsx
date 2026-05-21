@@ -53,35 +53,35 @@ const App = () => {
       />
 
 
-      <div className="w-full h-10 flex gap-10">
+      <div className="w-full h-auto md:h-10 flex flex-col md:flex-row gap-4 md:gap-10 p-4 md:p-0">
 
-      <div className="left w-1/2 h-full flex justify-end items-center gap-4">
+      <div className="left w-full md:w-1/2 h-auto md:h-full flex justify-center md:justify-end items-center gap-2 md:gap-4 flex-wrap">
 
         <button 
           onClick={() => callAPI("fix-code")}
-          className="border w-[120px] text-amber-400 px-4 py-1 rounded hover:cursor-pointer hover:text-purple-500"
+          className="border w-[100px] md:w-[120px] text-amber-400 px-4 py-1 rounded hover:cursor-pointer hover:text-purple-500 text-sm md:text-base"
         >
           Fix
         </button>
 
         <button 
           onClick={() => callAPI("review")}
-          className="border w-[120px] text-amber-400 px-4 py-1 rounded hover:cursor-pointer hover:text-purple-500"
+          className="border w-[100px] md:w-[120px] text-amber-400 px-4 py-1 rounded hover:cursor-pointer hover:text-purple-500 text-sm md:text-base"
         >
           Review
         </button>
         <button 
           onClick={() => callAPI("run")}
-          className="border w-[120px] bg-amber-500/80 text-white-400 px-4 py-1 rounded hover:cursor-pointer hover:text-gray-300 "
+          className="border w-[100px] md:w-[120px] bg-amber-500/80 text-white-400 px-4 py-1 rounded hover:cursor-pointer hover:text-gray-300 text-sm md:text-base"
         >
           Run
         </button>
       </div>
 
-      <div className="right w-1/2 h-full flex justify-between items-center">
+      <div className="right w-full md:w-1/2 h-auto md:h-full flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
         
         <div
-          className={`text-2xl font-bold transition-all duration-500 ${
+          className={`text-xl md:text-2xl font-bold transition-all duration-500 ${
             darkMode
               ? "bg-[#0f172a] text-white"
               : "bg-white text-black"
@@ -92,7 +92,7 @@ const App = () => {
 
         <button 
           onClick={()=> setOutput("")} 
-          className="border w-[120px] text-amber-600 px-4 py-1 rounded hover:cursor-pointer hover:text-purple-500">
+          className="border w-[100px] md:w-[120px] text-amber-600 px-4 py-1 rounded hover:cursor-pointer hover:text-purple-500 text-sm md:text-base">
           Clear
         </button>
 
@@ -102,11 +102,11 @@ const App = () => {
           
 
       <div
-        className="main flex"
-        style={{ height: "calc(100vh - 90px)" }}
+        className="main flex flex-col md:flex-row"
+        style={{ height: "calc(100vh - 120px)" }}
       >
 
-        <div className="left w-1/2 h-full border-r border-gray-700 flex" >
+        <div className="left w-full md:w-1/2 h-1/2 md:h-full border-r border-b md:border-b-0 border-gray-700 flex" >
 
           <div
             className={`w-[50px] h-full flex flex-col items-center gap-10 ${
@@ -229,23 +229,26 @@ const App = () => {
 
         </div>
 
-         <div className="w-[1px] bg-gray-700 gap-10"></div>
+        {/* <div className="w-[1px] bg-gray-700 gap-10"></div> */}
 
         <div
-          className={`right w-1/2 h-full p-3 overflow-auto transition-all duration-500 ${
+          className={`right w-full md:w-1/2 h-1/2 md:h-full p-4 md:p-6 overflow-auto transition-all duration-500 ${
             darkMode
               ? "bg-[#0f172a] text-white"
               : "bg-white text-black"
           }`}
         >
 
-          <h1 className="text-2xl font-bold  text-center  ">
+          <h1 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">
             AI Review Output
-
           </h1>
 
-          <div className="object-contain">
-            <h1 className="wrap-break-word p-4 ">{output}</h1>
+          <div className="flex flex-col items-center">
+            <div className="w-full max-w-2xl px-2 md:px-4">
+              <p className="text-sm md:text-base leading-relaxed break-words whitespace-pre-wrap">
+                {output}
+              </p>
+            </div>
           </div>
         </div>
 
