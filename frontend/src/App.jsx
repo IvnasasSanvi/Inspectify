@@ -232,7 +232,7 @@ const App = () => {
          <div className="w-[1px] bg-gray-700 gap-10"></div>
 
         <div
-          className={`right w-1/2 h-full p-3 transition-all duration-500 ${
+          className={`right w-1/2 h-full p-3 overflow-auto transition-all duration-500 ${
             darkMode
               ? "bg-[#0f172a] text-white"
               : "bg-white text-black"
@@ -244,8 +244,8 @@ const App = () => {
 
           </h1>
 
-          <div>
-            <h1 className="wrap-break-word overflow-hidden p-4 ">{output}</h1>
+          <div className="object-contain">
+            <h1 className="wrap-break-word p-4 ">{output}</h1>
           </div>
         </div>
 
