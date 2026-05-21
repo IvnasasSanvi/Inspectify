@@ -245,7 +245,7 @@ const App = () => {
           </h1>
 
           <div>
-            <h1 className="whitespace-pre-wrap break-words p-4">{output}</h1>
+            <h1 className="wrap-break-word overflow-hidden p-4 ">{output}</h1>
           </div>
         </div>
 
